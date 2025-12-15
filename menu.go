@@ -12,7 +12,7 @@ import (
 type Item struct {
 	Code  int
 	Name  string
-	Price int64 // rupiah
+	Price int64
 }
 
 type Line struct {
@@ -35,7 +35,7 @@ func main() {
 
 	fmt.Println("=== Selamat Datang di ERPE ===")
 
-	// ================= INPUT BARANG =================
+	// Pengimputan barang
 	for {
 		printMenu()
 		fmt.Print("Masukkan kode item (0 untuk Pembayaran): ")
@@ -73,7 +73,7 @@ func main() {
 		fmt.Printf("✔ %d x %s ditambahkan\n", qty, item.Name)
 	}
 
-	// ================= HITUNG TOTAL =================
+	// Hitung total
 	var subtotal int64
 	var lines []Line
 
@@ -91,7 +91,7 @@ func main() {
 
 	total := subtotal
 
-	// ================= RINGKASAN =================
+	// Ringkasan pembelian
 	fmt.Println("\n--- Ringkasan Pembelian ---")
 	for _, l := range lines {
 		fmt.Printf("%s x%d = %s\n",
@@ -102,7 +102,7 @@ func main() {
 	}
 	fmt.Printf("TOTAL: %s\n", formatRupiah(total))
 
-	// ================= PEMBAYARAN =================
+	// Pembayaran
 	for {
 		fmt.Print("Masukkan jumlah bayar: ")
 		payInput, _ := reader.ReadString('\n')
@@ -114,7 +114,7 @@ func main() {
 			continue
 		}
 
-		// ✅ FITUR KEKURANGAN UANG
+		// menambahkan fitur kekurangan uang
 		if bayar < total {
 			kurang := total - bayar
 			fmt.Printf("Uang tidak cukup. Kurang %s\n", formatRupiah(kurang))
@@ -128,7 +128,7 @@ func main() {
 	}
 }
 
-// ================== FUNGSI ==================
+// fungsi menampilkan menu
 
 func printMenu() {
 	fmt.Println("\n-- MENU --")
